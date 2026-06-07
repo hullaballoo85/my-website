@@ -3,196 +3,391 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Natalia Cichocka — UX Designer with 7+ years experience in research-led design, accessibility, and design systems." />
   <title>Natalia Cichocka — UX Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --beige: #ede9e0;
+      --black: #0d0d0b;
       --white: #ffffff;
-      --dark: #2a2a28;
-      --muted: #6b6b66;
-      --gold: #b8942a;
-      --gold-light: #c9a63c;
-      --border: rgba(42,42,40,0.12);
-      --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'Jost', sans-serif;
+      --off-white: #f5f3ef;
+      --gold: #c9a227;
+      --gold-dark: #9e7d1a;
+      --dark: #1a1a18;
+      --mid: #5c5c58;
+      --light-border: rgba(13,13,11,0.1);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      font-family: var(--font-body);
+      font-family: var(--sans);
       font-weight: 300;
       background: var(--white);
       color: var(--dark);
       line-height: 1.7;
+      overflow-x: hidden;
     }
+
+    /* ── SKIP LINK (accessibility) ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      font-size: 13px;
+      border-radius: 0 0 4px 4px;
+      z-index: 999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
 
     /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: var(--white);
-      border-bottom: 0.5px solid var(--border);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--light-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 3rem;
-      height: 60px;
+      padding: 0 4rem;
+      height: 64px;
     }
 
     .nav-logo {
-      font-family: var(--font-body);
+      font-family: var(--sans);
       font-weight: 500;
-      font-size: 13px;
-      letter-spacing: 0.12em;
+      font-size: 15px;
+      letter-spacing: 0.08em;
       text-decoration: none;
       color: var(--dark);
     }
 
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 2.5rem;
       list-style: none;
     }
 
     .nav-links a {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
       text-decoration: none;
-      color: var(--muted);
+      color: var(--mid);
       transition: color 0.2s;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--gold);
+      transition: width 0.25s ease;
     }
 
     .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--gold);
+    .nav-links a[aria-current="page"] { color: var(--dark); }
+
+    .nav-links a:hover::after,
+    .nav-links a[aria-current="page"]::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--black) !important;
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem !important;
+      border-radius: 100px;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.02em !important;
+      transition: background 0.2s, transform 0.15s !important;
     }
 
-    .nav-links a.active {
-      border-bottom: 1.5px solid var(--gold);
-      padding-bottom: 2px;
-    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: #333 !important; transform: translateY(-1px); }
 
     /* ── HERO ── */
     #home {
       min-height: 100vh;
-      background: var(--beige);
-      display: flex;
-      flex-direction: column;
+      background: var(--white);
+      padding: 0 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 2rem 80px;
+      gap: 4rem;
+      padding-top: 64px;
+    }
+
+    .hero-text { padding: 4rem 0; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
     }
 
     .hero-headline {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(52px, 8vw, 100px);
-      letter-spacing: 0.04em;
-      line-height: 1.05;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(42px, 5vw, 72px);
+      line-height: 1.1;
       color: var(--dark);
       margin-bottom: 1.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold-dark);
     }
 
     .hero-sub {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 300;
-      color: var(--muted);
-      max-width: 480px;
+      color: var(--mid);
+      max-width: 440px;
       line-height: 1.8;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.5s;
+      margin-bottom: 2.5rem;
     }
 
-    .hero-cta {
-      margin-top: 2.5rem;
+    .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+
+    .btn-primary {
       display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.8rem 2rem;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #333; transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--dark);
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      border-bottom: 1px solid var(--dark);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--gold-dark); border-color: var(--gold-dark); }
+
+    .hero-image {
+      position: relative;
+      height: 70vh;
+      max-height: 600px;
+      background: var(--off-white);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image-placeholder {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-image-placeholder .big-initial {
+      font-family: var(--serif);
+      font-size: 120px;
+      font-weight: 400;
+      color: rgba(13,13,11,0.08);
+      line-height: 1;
+      display: block;
+    }
+
+    .hero-image-placeholder p {
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.8s;
-      transition: opacity 0.2s;
+      color: var(--mid);
+      margin-top: 1rem;
     }
 
-    .hero-cta:hover { opacity: 0.7; }
-
-    /* ── PORTFOLIO ── */
-    #portfolio {
-      padding: 100px 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
+    .hero-stats {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 1rem;
     }
 
-    .section-label {
+    .stat-pill {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    .stat-pill strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .stat-pill span {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-strip {
+      background: var(--black);
+      padding: 1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-inner {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-item {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin: 0 2rem;
+    }
+
+    .marquee-item.gold { color: var(--gold); }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SHARED SECTION ── */
+    .section-pad { padding: 120px 4rem; }
+
+    .section-header { margin-bottom: 4rem; }
+
+    .section-eyebrow {
       font-size: 11px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.5rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      display: block;
     }
 
     .section-title {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: 0.06em;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
       color: var(--dark);
-      margin-bottom: 0.75rem;
     }
 
-    .section-intro {
-      font-size: 14px;
-      color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 3.5rem;
+    .section-lead {
+      font-size: 15px;
+      color: var(--mid);
+      max-width: 520px;
+      margin-top: 1rem;
       line-height: 1.85;
     }
 
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--off-white); }
+
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
 
     .project-card {
-      background: var(--beige);
-      border-radius: 4px;
-      padding: 2rem;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: default;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(42,42,40,0.08);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(13,13,11,0.1);
     }
 
-    .project-number {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      color: var(--gold);
+    .project-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-img-placeholder {
+      font-family: var(--serif);
+      font-size: 48px;
+      color: rgba(13,13,11,0.12);
+      font-style: italic;
+    }
+
+    .project-img-note {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      font-size: 10px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      color: var(--mid);
+      background: rgba(255,255,255,0.85);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .project-body { padding: 1.75rem; }
+
+    .project-index {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      font-weight: 400;
     }
 
     .project-title {
-      font-family: var(--font-display);
+      font-family: var(--serif);
       font-weight: 400;
       font-size: 22px;
       line-height: 1.2;
@@ -202,7 +397,7 @@
 
     .project-desc {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--mid);
       line-height: 1.8;
       margin-bottom: 1.25rem;
     }
@@ -211,329 +406,576 @@
 
     .tag {
       font-size: 10px;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      border: 0.5px solid var(--border);
-      border-radius: 2px;
-      padding: 3px 8px;
-      background: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+      color: var(--mid);
+      border: 1px solid var(--light-border);
+      border-radius: 3px;
+      padding: 3px 9px;
+      background: var(--off-white);
     }
 
     /* ── ABOUT ── */
-    #about {
-      background: var(--dark);
-      color: var(--white);
-      padding: 100px 3rem;
-    }
+    #about { background: var(--white); }
 
-    .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    .about-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
+      gap: 6rem;
       align-items: start;
     }
 
-    #about .section-label { color: var(--gold-light); }
+    .about-statement {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(22px, 2.5vw, 32px);
+      line-height: 1.45;
+      color: var(--dark);
+      margin-bottom: 2rem;
+    }
 
-    #about .section-title { color: var(--white); }
+    .about-statement em { font-style: italic; color: var(--gold-dark); }
 
-    .about-bio p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
+    .about-body p {
+      font-size: 15px;
+      color: var(--mid);
       line-height: 1.9;
       margin-bottom: 1.25rem;
     }
 
-    .about-bio p:last-child { margin-bottom: 0; }
+    .skills-block { margin-bottom: 2.5rem; }
 
-    .skills-col { }
-
-    .skills-group { margin-bottom: 2rem; }
-
-    .skills-group-label {
+    .skills-block-title {
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold-light);
+      color: var(--dark);
+      font-weight: 500;
       margin-bottom: 0.75rem;
+      display: block;
     }
 
     .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    .skill-chip {
-      font-size: 11px;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.6);
-      border: 0.5px solid rgba(255,255,255,0.15);
-      border-radius: 2px;
-      padding: 5px 12px;
+    .skill-tag {
+      font-size: 12px;
+      color: var(--dark);
+      border: 1px solid var(--light-border);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-weight: 300;
+      transition: border-color 0.2s, color 0.2s;
     }
+
+    .skill-tag:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+    .edu-list { border-top: 1px solid var(--light-border); }
 
     .edu-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 0.6rem 0;
-      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--light-border);
+      gap: 1rem;
     }
 
-    .edu-item:last-child { border-bottom: none; }
-
-    .edu-degree {
-      font-size: 13px;
-      color: rgba(255,255,255,0.75);
-    }
-
-    .edu-year {
-      font-size: 11px;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.06em;
-    }
+    .edu-degree { font-size: 14px; color: var(--dark); font-weight: 300; }
+    .edu-school { font-size: 12px; color: var(--mid); margin-top: 2px; }
+    .edu-year { font-size: 12px; color: var(--mid); white-space: nowrap; flex-shrink: 0; }
 
     /* ── CONTACT ── */
-    #contact {
-      padding: 80px 3rem;
-      text-align: center;
-      background: var(--white);
-      border-top: 0.5px solid var(--border);
+    #contact { background: var(--black); }
+
+    #contact .section-eyebrow { color: var(--gold); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
     }
 
-    .contact-inner { max-width: 480px; margin: 0 auto; }
+    #contact .section-title { color: var(--white); }
+    #contact .section-lead { color: rgba(255,255,255,0.5); max-width: 380px; }
 
-    .contact-headline {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: 0.06em;
-      color: var(--dark);
-      margin-bottom: 0.75rem;
+    .contact-info { margin-top: 3rem; }
+
+    .contact-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .contact-sub {
+    .contact-row:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+
+    .contact-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      min-width: 70px;
+    }
+
+    .contact-value {
       font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-
-    .contact-link {
-      display: inline-block;
-      font-size: 13px;
-      color: var(--gold);
+      color: rgba(255,255,255,0.75);
       text-decoration: none;
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
     }
 
-    .contact-link:hover { opacity: 0.7; }
+    .contact-value:hover { color: var(--gold); }
+
+    .contact-form { }
+
+    .form-group { margin-bottom: 1.5rem; }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 0.85rem 1rem;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+    .form-input:focus,
+    .form-textarea:focus { border-color: var(--gold); }
+
+    .form-textarea { resize: vertical; min-height: 130px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .btn-submit {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.9rem 2.25rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-submit:hover { background: #d4aa2e; transform: translateY(-2px); }
+    .btn-submit:focus { outline: 2px solid var(--white); outline-offset: 3px; }
 
     /* ── FOOTER ── */
     footer {
-      padding: 1.5rem 3rem;
-      border-top: 0.5px solid var(--border);
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    footer p {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-links { display: flex; gap: 2rem; }
+
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .footer-links a:hover { color: var(--gold); }
 
+    /* ── REVEAL ANIMATION ── */
     .reveal {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(24px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* ── FOCUS STYLES (accessibility) ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
-      #portfolio, #contact, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
-      #about { padding: 80px 1.5rem; }
-      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .nav-links { gap: 1.5rem; }
+    @media (max-width: 960px) {
+      nav { padding: 0 2rem; }
+      .section-pad { padding: 80px 2rem; }
+      #home { grid-template-columns: 1fr; padding: 2rem; padding-top: 80px; min-height: auto; }
+      .hero-image { height: 40vw; min-height: 260px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links .nav-cta { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main navigation">
     <a href="#home" class="nav-logo">HOME</a>
-    <ul class="nav-links">
-      <li><a href="#portfolio" class="active">Portfolio</a></li>
-      <li><a href="#about">About me</a></li>
-      <li><a href="#contact">Contact</a></li>
+    <ul class="nav-links" role="list">
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section id="home">
-    <h1 class="hero-headline">Designing experiences<br><em>people actually enjoy.</em></h1>
-    <p class="hero-sub">UX Designer with 7+ years of experience bridging research and design — from medical devices and university software to global e-commerce brands.</p>
-    <a href="#portfolio" class="hero-cta">See my work ↓</a>
-  </section>
+  <main id="main">
 
-  <!-- PORTFOLIO -->
-  <section id="portfolio">
-    <p class="section-label reveal">Selected work</p>
-    <h2 class="section-title reveal">Portfolio</h2>
-    <p class="section-intro reveal">A selection of projects spanning healthcare, higher education, and retail — each rooted in research, shaped by users, and built with teams.</p>
-
-    <div class="portfolio-grid">
-      <div class="project-card reveal">
-        <p class="project-number">Project 01</p>
-        <h3 class="project-title">Medical Device Design System</h3>
-        <p class="project-desc">Two parallel design systems for a desktop app and embedded instrument, built to FDA accessibility and risk standards — translated into 15 languages.</p>
-        <div class="tag-row">
-          <span class="tag">Healthcare</span>
-          <span class="tag">Figma</span>
-          <span class="tag">WCAG 2.2</span>
-          <span class="tag">FDA</span>
-          <span class="tag">Usability Testing</span>
+    <!-- HERO -->
+    <section id="home" aria-labelledby="hero-heading">
+      <div class="hero-text">
+        <p class="hero-eyebrow">UX Designer · Wrocław / Remote</p>
+        <h1 class="hero-headline" id="hero-heading">
+          Design That<br><em>Feels Right.</em>
+        </h1>
+        <p class="hero-sub">
+          I turn complex systems into experiences people actually understand — through research, accessibility, and close collaboration with the teams building the product.
+        </p>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn-primary">See My Work</a>
+          <a href="#about" class="btn-ghost">Learn more about me</a>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <p class="project-number">Project 02</p>
-        <h3 class="project-title">University Admin App</h3>
-        <p class="project-desc">End-to-end UX for complex desktop software used by administrative staff in Polish universities — research-led, accessibility-audited, and built close to stakeholders.</p>
-        <div class="tag-row">
-          <span class="tag">EdTech</span>
-          <span class="tag">Wireframing</span>
-          <span class="tag">WCAG 2.1</span>
-          <span class="tag">Surveys</span>
+      <div class="hero-image" role="img" aria-label="Portfolio preview placeholder — replace with your project image">
+        <div class="hero-image-placeholder">
+          <span class="big-initial">NC</span>
+          <p>Add your project image here</p>
+        </div>
+        <div class="hero-stats" aria-label="Career highlights">
+          <div class="stat-pill">
+            <strong>7+</strong>
+            <span>Years experience</span>
+          </div>
+          <div class="stat-pill">
+            <strong>15</strong>
+            <span>Languages supported</span>
+          </div>
+          <div class="stat-pill">
+            <strong>2</strong>
+            <span>Design systems built</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="project-card reveal">
-        <p class="project-number">Project 03</p>
-        <h3 class="project-title">Global E-Commerce UX</h3>
-        <p class="project-desc">UX design and research for brands including Unilever, Pokémon, Helen of Troy, and OXO — spanning discovery, wireframes, prototyping, and quality assurance.</p>
-        <div class="tag-row">
-          <span class="tag">E-commerce</span>
-          <span class="tag">Research</span>
-          <span class="tag">Prototyping</span>
-          <span class="tag">QA</span>
-        </div>
+    <!-- MARQUEE -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-inner">
+        <span class="marquee-item gold">Figma</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">UX Research</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">WCAG 2.2</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Design Systems</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">FDA Compliance</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Usability Testing</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">Accessibility</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Information Architecture</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">Figma</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">UX Research</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">WCAG 2.2</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Design Systems</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">FDA Compliance</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Usability Testing</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item gold">Accessibility</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Information Architecture</span>
+        <span class="marquee-item">·</span>
       </div>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-inner">
-      <div class="about-bio">
-        <p class="section-label reveal">About me</p>
-        <h2 class="section-title reveal">The person<br><em>behind the pixels.</em></h2>
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section-pad" aria-labelledby="portfolio-heading">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Selected work</span>
+        <h2 class="section-title" id="portfolio-heading">Portfolio</h2>
+        <p class="section-lead">Projects spanning healthcare, higher education, and global retail — each rooted in research and shaped by the people who use them.</p>
+      </div>
+
+      <div class="portfolio-grid">
+        <article class="project-card reveal">
+          <div class="project-img" role="img" aria-label="Medical device design system — replace with project screenshot">
+            <span class="project-img-placeholder">Rx</span>
+            <span class="project-img-note">Add project image</span>
+          </div>
+          <div class="project-body">
+            <p class="project-index">01 — Healthcare</p>
+            <h3 class="project-title">Medical Device Design System</h3>
+            <p class="project-desc">Two parallel design systems for a desktop app and an embedded instrument at Qiagen. Designed for FDA compliance, WCAG 2.2 accessibility, and translation into 15 languages — validated through formative evaluations and onsite lab sessions in the UK and Poland.</p>
+            <div class="tag-row" aria-label="Technologies and methods used">
+              <span class="tag">Figma</span>
+              <span class="tag">Design Systems</span>
+              <span class="tag">WCAG 2.2</span>
+              <span class="tag">FDA</span>
+              <span class="tag">Usability Testing</span>
+              <span class="tag">Accessibility Audit</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-img" role="img" aria-label="University admin app — replace with project screenshot">
+            <span class="project-img-placeholder">Edu</span>
+            <span class="project-img-note">Add project image</span>
+          </div>
+          <div class="project-body">
+            <p class="project-index">02 — EdTech</p>
+            <h3 class="project-title">University Admin Software</h3>
+            <p class="project-desc">End-to-end UX for two complex desktop applications — one for deans' office staff at Polish universities, and one for library use. Research-led from business requirement analysis through wireframes, visual design, and accessibility audit against WCAG 2.1.</p>
+            <div class="tag-row" aria-label="Technologies and methods used">
+              <span class="tag">Wireframing</span>
+              <span class="tag">Visual Design</span>
+              <span class="tag">WCAG 2.1</span>
+              <span class="tag">Stakeholder Interviews</span>
+              <span class="tag">Surveys</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-img" role="img" aria-label="Global e-commerce UX — replace with project screenshot">
+            <span class="project-img-placeholder">Shop</span>
+            <span class="project-img-note">Add project image</span>
+          </div>
+          <div class="project-body">
+            <p class="project-index">03 — E-commerce</p>
+            <h3 class="project-title">Global E-Commerce UX</h3>
+            <p class="project-desc">UX research and design for international brands including Unilever, Pokémon, Helen of Troy (OXO & Hydro Flask), and RX Bar. Led discovery, competitive analysis, wireframing, prototyping, and design QA across multiple concurrent projects.</p>
+            <div class="tag-row" aria-label="Technologies and methods used">
+              <span class="tag">UX Research</span>
+              <span class="tag">Competitive Analysis</span>
+              <span class="tag">Prototyping</span>
+              <span class="tag">Design QA</span>
+              <span class="tag">CJM</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-pad" aria-labelledby="about-heading">
+      <div class="about-layout">
+        <div>
+          <div class="section-header reveal">
+            <span class="section-eyebrow">About me</span>
+            <h2 class="section-title" id="about-heading">The person<br>behind the pixels.</h2>
+          </div>
+          <div class="about-body reveal">
+            <p class="about-statement">I'm a UX Designer with a background in <em>Psychology and Art History</em> — which means I think about people as much as I think about design.</p>
+            <p>For over seven years I've been working at the intersection of research and design: interviewing users, building design systems, running usability tests, and making sure software is accessible to everyone who needs it.</p>
+            <p>Right now I'm designing medical device software at Qiagen (via Sii), working with multidisciplinary teams across Poland, Spain, and the UK to meet FDA and WCAG 2.2 standards. Before that I worked on university tools, library systems, and e-commerce at Gorilla Group for global brands like Unilever and Pokémon.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="skills-block reveal">
+            <span class="skills-block-title">Tools & methods</span>
+            <div class="skills-list" role="list">
+              <span class="skill-tag" role="listitem">Figma</span>
+              <span class="skill-tag" role="listitem">Sketch</span>
+              <span class="skill-tag" role="listitem">Adobe Cloud</span>
+              <span class="skill-tag" role="listitem">Design Systems</span>
+              <span class="skill-tag" role="listitem">UX Research</span>
+              <span class="skill-tag" role="listitem">Usability Testing</span>
+              <span class="skill-tag" role="listitem">HTML &amp; CSS</span>
+              <span class="skill-tag" role="listitem">Google Analytics</span>
+              <span class="skill-tag" role="listitem">Agile / Scrum</span>
+            </div>
+          </div>
+
+          <div class="skills-block reveal">
+            <span class="skills-block-title">Specialisms</span>
+            <div class="skills-list" role="list">
+              <span class="skill-tag" role="listitem">WCAG / ADA</span>
+              <span class="skill-tag" role="listitem">FDA Compliance</span>
+              <span class="skill-tag" role="listitem">IA &amp; CJM</span>
+              <span class="skill-tag" role="listitem">Personas</span>
+              <span class="skill-tag" role="listitem">Heuristic Evaluation</span>
+              <span class="skill-tag" role="listitem">Cognitive Walkthrough</span>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <span class="skills-block-title">Education</span>
+            <dl class="edu-list">
+              <div class="edu-item">
+                <div>
+                  <dt class="edu-degree">Postgraduate Diploma — UX Design</dt>
+                  <dd class="edu-school">SWPS University</dd>
+                </div>
+                <span class="edu-year">2019</span>
+              </div>
+              <div class="edu-item">
+                <div>
+                  <dt class="edu-degree">MA Psychology</dt>
+                  <dd class="edu-school">SWPS University</dd>
+                </div>
+                <span class="edu-year">2016</span>
+              </div>
+              <div class="edu-item">
+                <div>
+                  <dt class="edu-degree">BA History of Art</dt>
+                  <dd class="edu-school">University of Wrocław</dd>
+                </div>
+                <span class="edu-year">2008</span>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-pad" aria-labelledby="contact-heading">
+      <div class="contact-layout">
+        <div>
+          <div class="section-header reveal">
+            <span class="section-eyebrow">Get in touch</span>
+            <h2 class="section-title" id="contact-heading">Let's Work<br>Together.</h2>
+            <p class="section-lead">Have a project in mind or just want to explore possibilities? I'd love to hear from you.</p>
+          </div>
+          <div class="contact-info reveal" aria-label="Contact information">
+            <div class="contact-row">
+              <span class="contact-label">Email</span>
+              <a href="mailto:cichocka.nataliaa@gmail.com" class="contact-value">cichocka.nataliaa@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">Phone</span>
+              <a href="tel:+48605883289" class="contact-value">+48 605 883 289</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">Based in</span>
+              <span class="contact-value">Poland · Available remotely</span>
+            </div>
+          </div>
+        </div>
+
         <div class="reveal">
-          <p>I'm a UX Designer with a background in Psychology and Art History — which means I think about people as much as pixels. For over seven years I've been working at the intersection of research and design: interviewing users, building design systems, running usability tests, and making sure software is accessible to everyone who needs it.</p>
-          <p>Right now I'm designing medical device software at Qiagen (via Sii), working with teams across Poland, Spain, and the UK to meet FDA standards and WCAG 2.2 requirements. Previously I've worked on university tools, library systems, and e-commerce for global brands through Gorilla Group and American Systems.</p>
+          <form action="mailto:cichocka.nataliaa@gmail.com" method="POST" enctype="text/plain" aria-label="Contact form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name" class="form-label">First name <span aria-label="required">*</span></label>
+                <input type="text" id="first-name" name="first-name" class="form-input" placeholder="Ania" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="last-name" class="form-label">Last name <span aria-label="required">*</span></label>
+                <input type="text" id="last-name" name="last-name" class="form-input" placeholder="Kowalska" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email <span aria-label="required">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="ania@example.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject <span aria-label="required">*</span></label>
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="Project enquiry" required />
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Message <span aria-label="required">*</span></label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </form>
         </div>
       </div>
+    </section>
 
-      <div class="skills-col reveal">
-        <div class="skills-group">
-          <p class="skills-group-label">Tools & methods</p>
-          <div class="skills-list">
-            <span class="skill-chip">Figma</span>
-            <span class="skill-chip">Sketch</span>
-            <span class="skill-chip">Design Systems</span>
-            <span class="skill-chip">UX Research</span>
-            <span class="skill-chip">Usability Testing</span>
-            <span class="skill-chip">HTML &amp; CSS</span>
-            <span class="skill-chip">Google Analytics</span>
-            <span class="skill-chip">Adobe Cloud</span>
-            <span class="skill-chip">Agile / Scrum</span>
-          </div>
-        </div>
-
-        <div class="skills-group">
-          <p class="skills-group-label">Specialisms</p>
-          <div class="skills-list">
-            <span class="skill-chip">WCAG / ADA</span>
-            <span class="skill-chip">FDA Compliance</span>
-            <span class="skill-chip">IA &amp; CJM</span>
-            <span class="skill-chip">Personas</span>
-            <span class="skill-chip">Heuristic Evaluation</span>
-          </div>
-        </div>
-
-        <div class="skills-group">
-          <p class="skills-group-label">Education</p>
-          <div class="edu-item">
-            <span class="edu-degree">Postgraduate Diploma — UX Design</span>
-            <span class="edu-year">2019</span>
-          </div>
-          <div class="edu-item">
-            <span class="edu-degree">MA Psychology</span>
-            <span class="edu-year">2016</span>
-          </div>
-          <div class="edu-item">
-            <span class="edu-degree">BA History of Art</span>
-            <span class="edu-year">2008</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <p class="section-label reveal">Get in touch</p>
-      <h2 class="contact-headline reveal">Let's work together.</h2>
-      <p class="contact-sub reveal">Have a project in mind? I'd love to hear about it.</p>
-      <a href="mailto:cichocka.nataliaa@gmail.com" class="contact-link reveal">cichocka.nataliaa@gmail.com</a>
-    </div>
-  </section>
+  </main>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 Natalia Cichocka</p>
-    <p>+48 605 883 289</p>
+    <p class="footer-copy">© 2026 Natalia Cichocka. All rights reserved.</p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#home">Home</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="mailto:cichocka.nataliaa@gmail.com">Email</a>
+    </nav>
   </footer>
 
   <script>
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
+    const io = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
 
-    // Active nav link on scroll
+    // Active nav on scroll
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
+    const navAs = document.querySelectorAll('.nav-links a[href^="#"]');
+    const onScroll = () => {
       let current = '';
       sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
       });
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      navAs.forEach(a => {
+        const active = a.getAttribute('href') === '#' + current;
+        a.setAttribute('aria-current', active ? 'page' : 'false');
       });
-    });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Pause marquee on reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelector('.marquee-inner').style.animation = 'none';
+    }
   </script>
 </body>
 </html>
