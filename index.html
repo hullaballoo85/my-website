@@ -1070,7 +1070,8 @@
         </div>
 
         <div class="reveal">
-          <form action="mailto:cichocka.nataliaa@gmail.com" method="POST" enctype="text/plain" aria-label="Contact form" novalidate>
+          <form action="https://formspree.io/cichocka.nataliaa@gmail.com" method="POST" aria-label="Contact form" novalidate>
+            <input type="hidden" name="_subject" value="New message from your portfolio site" />
             <div class="form-row">
               <div class="form-group">
                 <label for="first-name" class="form-label">First name <span aria-label="required">*</span></label>
@@ -1155,6 +1156,40 @@
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Contact form submission via Formspree
+    const contactForm = document.querySelector('.contact-form, form[aria-label="Contact form"]');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submitBtn = contactForm.querySelector('.btn-submit');
+        const originalLabel = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        try {
+          const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { Accept: 'application/json' },
+          });
+
+          if (response.ok) {
+            submitBtn.textContent = 'Message sent ✓';
+            contactForm.reset();
+          } else {
+            submitBtn.textContent = 'Something went wrong — try again';
+          }
+        } catch (err) {
+          submitBtn.textContent = 'Something went wrong — try again';
+        } finally {
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalLabel;
+          }, 4000);
+        }
+      });
+    }
 
     // Pause marquee on reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
