@@ -110,7 +110,7 @@
     .nav-links a:hover::after,
     .nav-links a[aria-current="page"]::after { width: 100%; }
 
-    .nav-cv {
+    .nav-links li .nav-cv {
       font-size: 13px;
       font-weight: 500;
       color: #0d0d0b;
@@ -126,17 +126,23 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    .nav-cv::before {
-      content: '↓';
+    .nav-links li .nav-cv::before {
+      content: "↓";
       font-size: 14px;
+      line-height: 1;
     }
 
-    .nav-cv:hover {
+    .nav-links li .nav-cv::after {
+      display: none;
+    }
+
+    .nav-links li .nav-cv:hover {
       background: #0d0d0b;
       color: #ffffff;
+      border-color: #0d0d0b;
     }
 
-    .nav-cv:focus-visible {
+    .nav-links li .nav-cv:focus-visible {
       outline: 3px solid #1a6b9e;
       outline-offset: 3px;
     }
@@ -734,7 +740,14 @@
     <ul class="nav-links" role="list">
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#about">About Me</a></li>
-      <li><a href="Natalia_Cichocka_UX_Designer_CV.pdf" class="nav-cv" download aria-label="Download Natalia Cichocka CV as PDF">Download CV</a></li>
+      <li>
+        <a href="Natalia_Cichocka_UX_Designer_CV.pdf" 
+           download 
+           aria-label="Download Natalia Cichocka CV as PDF"
+           style="font-size:13px;font-weight:500;color:#0d0d0b;text-decoration:none;letter-spacing:0.04em;border:1.5px solid #0d0d0b;border-radius:100px;padding:0.55rem 1.25rem;min-height:44px;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s,color 0.2s;white-space:nowrap;">
+          ↓ Download CV
+        </a>
+      </li>
       <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
     </ul>
   </nav>
