@@ -10,7 +10,16 @@ tabLinks.forEach((link) => {
 
     link.classList.add('active');
     document.getElementById(target).classList.add('active');
+
+    navLinks.classList.remove('open');
   });
+});
+
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
 });
 
 const form = document.querySelector('#kontakt form');

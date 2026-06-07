@@ -3,27 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moja strona</title>
+  <title>Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Moja strona</h1>
-    <nav>
-      <button class="tab-link active" data-tab="o-mnie">O mnie</button>
-      <button class="tab-link" data-tab="portfolio">Portfolio</button>
-      <button class="tab-link" data-tab="kontakt">Kontakt</button>
+  <header class="site-header">
+    <nav class="navbar">
+      <button class="nav-toggle" aria-label="Otwórz menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#home" class="logo">Home</a>
+      <ul class="nav-links">
+        <li><button class="tab-link active" data-tab="portfolio">Portfolio</button></li>
+        <li><button class="tab-link" data-tab="o-mnie">About me</button></li>
+        <li><button class="tab-link" data-tab="kontakt">Contact</button></li>
+      </ul>
     </nav>
   </header>
 
-  <main>
-    <section id="o-mnie" class="tab-content active">
-      <h2>O mnie</h2>
-      <p>Cześć! Nazywam się [Twoje imię]. Tutaj możesz napisać kilka słów o sobie,
-         swoich zainteresowaniach i doświadczeniu.</p>
-    </section>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Home</h1>
+      <p>Witaj na mojej stronie — poznaj moje projekty, dowiedz się czegoś o mnie i napisz do mnie wiadomość.</p>
+    </div>
+  </section>
 
-    <section id="portfolio" class="tab-content">
+  <main>
+    <section id="portfolio" class="tab-content active">
       <h2>Portfolio</h2>
       <div class="portfolio-grid">
         <div class="portfolio-item">
@@ -41,8 +47,14 @@
       </div>
     </section>
 
+    <section id="o-mnie" class="tab-content">
+      <h2>About me</h2>
+      <p>Cześć! Nazywam się [Twoje imię]. Tutaj możesz napisać kilka słów o sobie,
+         swoich zainteresowaniach i doświadczeniu.</p>
+    </section>
+
     <section id="kontakt" class="tab-content">
-      <h2>Kontakt</h2>
+      <h2>Contact</h2>
       <form>
         <label for="name">Imię i nazwisko</label>
         <input type="text" id="name" name="name" required>
@@ -59,7 +71,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Moja strona</p>
+    <p>&copy; 2026 Home</p>
   </footer>
 
   <script src="script.js"></script>
