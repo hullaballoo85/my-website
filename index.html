@@ -728,6 +728,80 @@
     @media (max-width: 640px) {
       .nav-links .nav-cta { display: none; }
     }
+
+    /* ── MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      min-height: 44px;
+      min-width: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #0d0d0b;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 2px;
+      background: #0d0d0b;
+      transition: transform 0.2s, top 0.2s;
+    }
+
+    .nav-toggle span::before { top: -7px; }
+    .nav-toggle span::after { top: 7px; }
+
+    .nav-toggle[aria-expanded="true"] span { background: transparent; }
+    .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+    @media (max-width: 860px) {
+      .nav-toggle { display: inline-flex; }
+
+      .nav-links {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: #ffffff;
+        border-bottom: 1px solid var(--light-border);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease;
+      }
+
+      .nav-links.open { max-height: 420px; }
+
+      .nav-links li { padding: 0 2rem; }
+
+      .nav-links a,
+      .nav-links li .nav-cv,
+      .nav-links .nav-cta {
+        width: 100%;
+        justify-content: flex-start;
+        display: flex !important;
+      }
+
+      .nav-links li .nav-cv { margin: 0.5rem 0; justify-content: center; }
+      .nav-links .nav-cta { justify-content: center; margin-bottom: 0.75rem; }
+    }
   </style>
 </head>
 <body>
@@ -737,7 +811,10 @@
   <!-- NAV -->
   <nav aria-label="Main navigation">
     <a href="#home" class="nav-logo">HOME</a>
-    <ul class="nav-links" role="list">
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav-links">
+      <span></span>
+    </button>
+    <ul class="nav-links" id="primary-nav-links" role="list">
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#about">About Me</a></li>
       <li>
@@ -1063,6 +1140,20 @@
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinksList = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinksList.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    navLinksList.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinksList.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
 
     // Pause marquee on reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
