@@ -56,9 +56,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: #ffffff;
       border-bottom: 1px solid var(--light-border);
       display: flex;
       align-items: center;
@@ -69,11 +67,11 @@
 
     .nav-logo {
       font-family: var(--sans);
-      font-weight: 500;
+      font-weight: 700;
       font-size: 15px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-decoration: none;
-      color: var(--dark);
+      color: #0d0d0b;
     }
 
     .nav-links {
@@ -85,10 +83,10 @@
 
     .nav-links a {
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.04em;
       text-decoration: none;
-      color: var(--mid);
+      color: #3d3d3b;
       transition: color 0.2s;
       position: relative;
       padding: 0.75rem 0.25rem;
@@ -112,19 +110,56 @@
     .nav-links a:hover::after,
     .nav-links a[aria-current="page"]::after { width: 100%; }
 
-    .nav-cta {
-      background: var(--black) !important;
-      color: var(--white) !important;
-      padding: 0.55rem 1.4rem !important;
+    .nav-cv {
+      font-size: 13px;
+      font-weight: 500;
+      color: #0d0d0b;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border: 1.5px solid #0d0d0b;
       border-radius: 100px;
-      font-size: 13px !important;
-      font-weight: 400 !important;
-      letter-spacing: 0.02em !important;
-      transition: background 0.2s, transform 0.15s !important;
+      padding: 0.55rem 1.25rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s, color 0.2s;
     }
 
-    .nav-cta::after { display: none !important; }
-    .nav-cta:hover { background: #333 !important; transform: translateY(-1px); }
+    .nav-cv::before {
+      content: '↓';
+      font-size: 14px;
+    }
+
+    .nav-cv:hover {
+      background: #0d0d0b;
+      color: #ffffff;
+    }
+
+    .nav-cv:focus-visible {
+      outline: 3px solid #1a6b9e;
+      outline-offset: 3px;
+    }
+
+    .nav-cta {
+      background: #0d0d0b;
+      color: #ffffff;
+      padding: 0.65rem 1.5rem;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      transition: background 0.2s, transform 0.15s;
+      border: 2px solid #0d0d0b;
+    }
+
+    .nav-cta::after { display: none; }
+    .nav-cta:hover { background: #333333; border-color: #333333; transform: translateY(-1px); }
+    .nav-cta:focus-visible { outline: 3px solid #1a6b9e; outline-offset: 3px; }
 
     /* ── HERO ── */
     #home {
@@ -289,6 +324,14 @@
     }
 
     .marquee-item.gold { color: var(--gold-on-dark); }
+
+    @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 
     @keyframes marquee {
       from { transform: translateX(0); }
@@ -594,7 +637,7 @@
       font-weight: 400;
       color: var(--white);
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       -webkit-appearance: none;
     }
 
@@ -602,7 +645,7 @@
     .form-textarea::placeholder { color: #8a8a86; }
 
     .form-input:focus,
-    .form-textarea:focus { border-color: #5aabde; }
+    .form-textarea:focus { border-color: #5aabde; box-shadow: 0 0 0 3px rgba(90,171,222,0.35); }
 
     .form-textarea { resize: vertical; min-height: 130px; }
 
@@ -623,7 +666,7 @@
       transition: background 0.2s, transform 0.15s;
     }
 
-    .btn-submit:hover { background: #5c4400; transform: translateY(-2px); }
+    .btn-submit:hover { background: #ffffff; color: #5c4400; transform: translateY(-2px); }
     .btn-submit:focus { outline: 2px solid var(--white); outline-offset: 3px; }
 
     /* ── FOOTER ── */
@@ -646,17 +689,15 @@
       color: #9a9a96;
       text-decoration: none;
       transition: color 0.2s;
+      padding: 0.75rem 0.5rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
     }
 
     .footer-links a:hover { color: var(--gold-on-dark); }
 
-    /* ── REVEAL ANIMATION ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* ── REVEAL ANIMATION — see prefers-reduced-motion block above ── */
 
     /* ── FOCUS STYLES (accessibility) ── */
     :focus-visible {
@@ -693,6 +734,7 @@
     <ul class="nav-links" role="list">
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#about">About Me</a></li>
+      <li><a href="Natalia_Cichocka_UX_Designer_CV.pdf" class="nav-cv" download aria-label="Download Natalia Cichocka CV as PDF">Download CV</a></li>
       <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
     </ul>
   </nav>
@@ -735,7 +777,7 @@
     </section>
 
     <!-- MARQUEE -->
-    <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-strip" aria-hidden="true" role="marquee">
       <div class="marquee-inner">
         <span class="marquee-item gold">Figma</span>
         <span class="marquee-item">·</span>
@@ -928,7 +970,7 @@
             </div>
             <div class="contact-row">
               <span class="contact-label">Phone</span>
-              <a href="tel:+48605883289" class="contact-value">+48 605 883 289</a>
+              <a href="tel:+48605883289" class="contact-value" aria-label="Call Natalia Cichocka on +48 605 883 289">+48 605 883 289</a>
             </div>
             <div class="contact-row">
               <span class="contact-label">Based in</span>
@@ -959,7 +1001,7 @@
             </div>
             <div class="form-group">
               <label for="message" class="form-label">Message <span aria-label="required">*</span></label>
-              <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project..." required aria-required="true"></textarea>
             </div>
             <button type="submit" class="btn-submit">Send Message</button>
           </form>
@@ -972,11 +1014,11 @@
   <!-- FOOTER -->
   <footer>
     <p class="footer-copy">© 2026 Natalia Cichocka. All rights reserved.</p>
-    <nav class="footer-links" aria-label="Footer navigation">
+    <nav class="footer-links" aria-label="Footer navigation" role="navigation">
       <a href="#home">Home</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#about">About</a>
-      <a href="mailto:cichocka.nataliaa@gmail.com">Email</a>
+      <a href="mailto:cichocka.nataliaa@gmail.com" aria-label="Send email to Natalia Cichocka">Email</a>
     </nav>
   </footer>
 
